@@ -22,7 +22,7 @@ window.addEventListener( 'load', () => {
 
         var pc = [];
 
-        let socket = io( '/stream' );
+        let socket = io( 'http://localhost:3000/stream' );
 
         var socketId = '';
         var randomNumber = `__${h.generateRandomString()}__${h.generateRandomString()}__`;
