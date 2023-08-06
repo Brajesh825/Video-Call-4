@@ -12,8 +12,12 @@
     --white: #fff;
     --gray: #6c757d;
     --gray-dark: #343a40;
-    --primary: #007bff;
-    --secondary: #6c757d;
+    --primary: #fff;
+    /* Change the primary text color for dark theme */
+    --secondary: #ccc;
+    /* Change the secondary text color for dark theme */
+    --background: #343a40;
+    /* Change the background color for dark theme */
     --success: #28a745;
     --info: #17a2b8;
     --warning: #ffc107;
@@ -26,7 +30,13 @@
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace --primary-text-color: #212529;
+    --secondary-text-color: #6c757d;
+    --background-color: #fff;
+    --link-color: #007bff;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-size: 1rem;
+    --font-weight: 400;
 }
 
 *,
@@ -50,13 +60,13 @@ nav {
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 400;
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
     line-height: 1.5;
-    color: #212529;
+    color: var(--primary-text-color);
     text-align: left;
-    background-color: #fff
+    background-color: var(--background-color);
 }
 
 
@@ -71,14 +81,14 @@ small {
 }
 
 a {
-    color: #007bff;
+    color: var(--link-color);
     text-decoration: none;
-    background-color: transparent
+    background-color: transparent;
 }
 
 a:hover {
-    color: #0056b3;
-    text-decoration: underline
+    color: darken(var(--link-color), 10%);
+    text-decoration: underline;
 }
 
 a:not([href]) {
@@ -910,7 +920,7 @@ a.text-danger:hover {
 }
 
 .remote-video-controls {
-    position: absolute;
+    position: relative;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 300000;
@@ -926,10 +936,11 @@ a.text-danger:hover {
 }
 
 .local-video {
-    bottom: 0;
-    left: 0;
-    position: fixed;
+    bottom: 40px;
+    left: 15px;
+    position: absolute;
     width: 15vw;
+    z-index: 1;
 }
 
 .mirror-mode {
@@ -937,6 +948,8 @@ a.text-danger:hover {
     -moz-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
+    position: absolute;
+    z-index: 100000;
 }
 
 .sender-info {
@@ -1055,4 +1068,152 @@ a.text-danger:hover {
         width: 50%;
         z-index: 1000;
     }
+}
+
+/* my custom css */
+
+#videos {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 75vw;
+    max-height: 80vh;
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+}
+
+#videos>div {
+    flex: 1 1 calc(33.33% - 10px);
+    margin: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 50vw;
+}
+
+#videos div video {}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #343a40;
+    --text-color: #fff;
+    --link-color: #007bff;
+}
+
+body {
+    font-family: var(--font-family-sans-serif);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: 1.5;
+    color: var(--text-color);
+    text-align: left;
+    background-color: var(--background-color);
+    margin: 0;
+}
+
+/* Navbar Styles */
+.navbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color) !important;
+    color: var(--text-color) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-color) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: darken(var(--text-color), 10%) !important;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: var(--text-color);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Heading Styles */
+h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 2rem;
+}
+
+h4 {
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 1.5rem;
+}
+
+/* Link Styles */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: darken(var(--link-color), 10%);
+    text-decoration: underline;
+}
+
+
+
+
+#chat-messages >div {
+    margin-left: 2rem;
+}
+#chat-messages >  div > div {
+    padding-left: 1rem;
+    font-size: 1rem;
+    padding-right: 1rem;
 }
