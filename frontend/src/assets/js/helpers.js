@@ -1,5 +1,3 @@
-// handles operation on modules
-
 export default {
     generateRandomString() {
         const crypto = window.crypto || window.msCrypto;
@@ -254,24 +252,11 @@ export default {
 
 
 
-    setLocalStream(stream, mirrorMode = true, pauseVideo = true) {
+    setLocalStream(stream, mirrorMode = true) {
         const localVidElem = document.getElementById('local');
+
         localVidElem.srcObject = stream;
         mirrorMode ? localVidElem.classList.add('mirror-mode') : localVidElem.classList.remove('mirror-mode');
-        function pauseAllTracks(stream) {
-            if (stream) {
-                stream.getTracks().forEach(track => {
-                    track.enabled = false; // Pause the track
-                });
-            }
-        }
-
-        if (pauseVideo) {
-            console.trace()
-
-            console.log("pause stream");
-            pauseAllTracks(stream) // Pause the local video stream
-        }
     },
 
 
