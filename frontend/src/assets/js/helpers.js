@@ -1,4 +1,25 @@
 export default {
+
+    displayNotificationModal(message) {
+        const notificationModal = document.getElementById('notification-modal');
+        const notificationMessage = document.getElementById('notification-message');
+
+        // Update the message in the modal
+        notificationMessage.textContent = message;
+
+        // Show the modal
+        notificationModal.style.display = 'block';
+
+        // Add the 'fade' class to trigger the animation
+        notificationModal.classList.add('fade');
+
+        // Automatically hide the modal after 2 seconds
+        setTimeout(() => {
+            notificationModal.style.display = 'none';
+            notificationModal.classList.remove('fade');
+        }, 5000); // Display for 5 seconds
+    },
+
     generateRandomString() {
         const crypto = window.crypto || window.msCrypto;
         let array = new Uint32Array(1);
@@ -319,4 +340,9 @@ export default {
             }
         }, 2000);
     }
+
+
+
+
+
 };

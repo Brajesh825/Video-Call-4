@@ -41,14 +41,19 @@ window.addEventListener('load', () => {
             socketId = socket.io.engine.id;
             document.getElementById('randomNumber').innerText = randomNumber;
 
+            const username = sessionStorage.getItem( 'username' );
 
             socket.emit('subscribe', {
                 room: room,
-                socketId: socketId
+                socketId: socketId,
+                username
             });
 
 
             socket.on('new user', (data) => {
+                console.log(data);
+                helpers.displayNotificationModal(`${data.username} has entered the room!`);
+
                 socket.emit('newUserStart', { to: data.socketId, sender: socketId });
                 pc.push(data.socketId);
                 init(true, data.socketId);
@@ -56,6 +61,7 @@ window.addEventListener('load', () => {
 
 
             socket.on('newUserStart', (data) => {
+                console.log(data);
                 pc.push(data.sender);
                 init(false, data.sender);
             });
@@ -99,6 +105,7 @@ window.addEventListener('load', () => {
 
 
             socket.on('chat', (data) => {
+                console.log(data);
                 helpers.addChat(data, 'remote');
             });
         });

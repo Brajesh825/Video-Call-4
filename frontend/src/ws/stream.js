@@ -1,12 +1,15 @@
 const stream = (socket) => {
     socket.on('subscribe', (data) => {
+
+        console.log(data);
+
         //subscribe/join a room
         socket.join(data.room);
         socket.join(data.socketId);
 
         //Inform other members in the room of new user's arrival
         if (socket.adapter.rooms.has(data.room) === true) {
-            socket.to(data.room).emit('new user', { socketId: data.socketId });
+            socket.to(data.room).emit('new user', { socketId: data.socketId, username: data.username });
         }
     });
 
